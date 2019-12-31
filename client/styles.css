@@ -1,0 +1,36 @@
+body {
+  align-content: center;
+  text-align: center;
+}
+
+.deviceCreator {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.deviceCreator input{
+  font-weight: 555;
+  color: blue;
+  padding: 10px;
+  margin: 20px;
+}
+
+.configInterface {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.configInterface input{
+  font-weight: 555;
+  color: darkgreen;
+  padding: 10px;
+  margin: 20px;
+}
+
+
+form{
+  width: 100%
+}

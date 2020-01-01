@@ -2,8 +2,17 @@ import React from 'react';
 import CreateDevice from '../components/CreateDevice.jsx';
 const QuerryDevice = (props) => {
   const handleSubmit = (e) => {
+    console.log('submitting querry device')
     e.preventDefault();
+    console.log('executing devce querry')
     props.deviceQuerry();
+    fetch(`/api/?id=${props.nameString}`)
+    .then(response => response.json())
+    .then(deviceFound => {
+      console.log("device found",deviceFound)
+      props.findDevice(deviceFound);
+    });
+
   }
 
   return (

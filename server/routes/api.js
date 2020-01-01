@@ -11,7 +11,16 @@ const router = express.Router();
 //     res.sendStatus(222);
 //   } 
 // );
-
+router.get('/', deviceController.findDevice,
+  (req, res, next) => { 
+    if (res.locals.device === null){
+      res.status(444).send({message: 'No blah Found'})
+    }
+    else{
+      res.status(200).send(res.locals.device);
+    }
+  } 
+);
 router.post('/', deviceController.addDevice,
   (req, res, next) => { 
     res.sendStatus(200);

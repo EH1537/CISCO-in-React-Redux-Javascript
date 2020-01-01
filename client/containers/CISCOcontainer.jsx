@@ -8,30 +8,31 @@ import QuerryDevice from '../components/QuerryDevice.jsx';
 
 const mapStateToProps = (state) => ({
   //toggles for rendering
-  devTog: state.cisco.devTog,
-  interTog: state.cisco.interTog,
-  queryTog: state.cisco.queryTog,
-  deviceQuerryTog: state.cisco.deviceQuerryTog,
-  display: state.cisco.display,
+  devTog: state.toggle.devTog,
+  interTog: state.toggle.interTog,
+  queryTog: state.toggle.queryTog,
+  deviceQuerryTog: state.toggle.deviceQuerryTog,
+  display: state.device.display,
   //interface
-  interfaceName: state.cisco.interfaceName,
-  interfaceAddress: state.cisco.interfaceAddress,
-  interfaceDescription: state.cisco.interfaceDescription,
-  interfaceSubnet: state.cisco.interfaceSubnet,
+  interfaceName: state.interface.interfaceName,
+  interfaceAddress: state.interface.interfaceAddress,
+  interfaceDescription: state.interface.interfaceDescription,
+  interfaceSubnet: state.interface.interfaceSubnet,
+  displayInterface: state.interface.display,  
   //device querry
-  RouterOrSwitch: state.cisco.RouterOrSwitch,
-  nameString: state.cisco.nameString,
-  secretString: state.cisco.secretString,
-  conString: state.cisco.conString,
-  auxString: state.cisco.auxString,
+  RouterOrSwitch: state.device.RouterOrSwitch,
+  nameString: state.device.nameString,
+  secretString: state.device.secretString,
+  conString: state.device.conString,
+  auxString: state.device.auxString,
   //router only
-  vtyString: state.cisco.vtyString,
+  vtyString: state.device.vtyString,
   //switch only
-  vlanNumString: state.cisco.vlanNumString,
-  vlanIPString: state.cisco.vlanIPString,
-  vlanSubString: state.cisco.vlanSubString,
-  switchGateString: state.cisco.switchGateString,
-  bannerInString: state.cisco.bannerInString,
+  vlanNumString: state.device.vlanNumString,
+  vlanIPString: state.device.vlanIPString,
+  vlanSubString: state.device.vlanSubString,
+  switchGateString: state.device.switchGateString,
+  bannerInString: state.device.bannerInString,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -45,19 +46,32 @@ const mapDispatchToProps = (dispatch) => ({
   createDevice: () => dispatch(actions.createDevice()),
   generateConfig: () => dispatch(actions.generateConfig()),
   deviceQuerry: () => dispatch(actions.deviceQuerry()),
+  findDevice: (object) => dispatch(actions.findDevice(object)),
+  fieldBlanker: () => dispatch(actions.fieldBlanker()),
 });
 
 class CISCOcontainer extends Component {
 
 
   render(props) {
+    function devClick(){
+      console.log('in dev click')
+      this.props.fieldBlanker();
+      this.props.createDeviceToggle();
+    }
+
+    function querryClick(){
+      console.log('in querry click')
+      this.props.fieldBlanker();
+      this.props.querryDeviceToggle();      
+    }
     return (
       <main>
         <div className="container">
           <div className="outerBox">
             <h1 id="header">Choose an Action</h1>
-            <button id='createDev' type='button' onClick={() => this.props.createDeviceToggle()}>Create Device</button>
-            <button id='queryDev' type='button' onClick={() => this.props.querryDeviceToggle()}>Device Lookup</button>
+            <button id='createDev' type='button' onClick={()=> {this.props.fieldBlanker(),this.props.createDeviceToggle()}  }>Create Device</button>
+            <button id='queryDev' type='button' onClick={()=> {this.props.fieldBlanker(),this.props.querryDeviceToggle()}  }>Device Lookup</button>
             <button id='configInter' type='button' onClick={() => this.props.configureInterfaceToggle()}>Configure Interface</button>
 
 
@@ -86,6 +100,7 @@ class CISCOcontainer extends Component {
             <div><QuerryDevice
               deviceQuerryTog={this.props.deviceQuerryTog}
               deviceQuerry={this.props.deviceQuerry}
+              findDevice={this.props.findDevice}
 
               //to be passed down to the subsequent configuration display
               createDevice={this.props.createDevice}
@@ -105,9 +120,6 @@ class CISCOcontainer extends Component {
               bannerInString={this.props.bannerInString}
               VLanCheck={this.props.VLanCheck}
               display={this.props.display}
-              
-              
-              
               /></div>}
 
             {this.props.interTog === true &&
@@ -118,12 +130,12 @@ class CISCOcontainer extends Component {
                 interfaceSubnet={this.props.interfaceSubnet}
                 interfaceName={this.props.interfaceName}
                 createInterface={this.props.createInterface}
-                display={this.props.display}
+                display={this.props.displayInterface}
               /></div>}
           </div>
         </div>
-      </main>
-    )
+        </main>
+      )
   }
 
 }

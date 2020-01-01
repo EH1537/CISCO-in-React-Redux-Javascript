@@ -49,3 +49,32 @@ export const deviceQuerry = () => ({
   type: types.DEVICE_QUERRY,
   payload: ''
 });
+
+export const findDevice = (deviceObj) => ({
+  type: types.FIND_DEVICE,
+  payload: deviceObj
+});
+
+export const fieldBlanker = () => ({
+  type: types.FIELD_BLANKER,
+  payload: ''
+});
+
+// export function deviceHasErroes(bool) {
+//   return {
+//       type: 'DEVICE_HAS_ERRORED',
+//       hasErrored: bool
+//   };
+// }
+// export function itemsIsLoading(bool) {
+//   return {
+//       type: 'DEVICE_IS_LOADING',
+//       isLoading: bool
+//   };
+// }
+// export function itemsFetchDataSuccess(items) {
+//   return {
+//       type: 'DEVICE_FETCH_DATA_SUCCESS',
+//       items
+//   };
+// }

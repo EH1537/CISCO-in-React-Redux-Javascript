@@ -4,33 +4,33 @@ const path = require('path');
 const deviceController = {};
 
 const checker = ['RouterOrSwitch',
-'nameString',
-'secretString',
-'conString',
-'auxString',
-'bannerInString',
-'vtyString',
-'vlanNumString',
-'vlanIPString',
-'vlanSubString',
-'switchGateString'];
+  'nameString',
+  'secretString',
+  'conString',
+  'auxString',
+  'bannerInString',
+  'vtyString',
+  'vlanNumString',
+  'vlanIPString',
+  'vlanSubString',
+  'switchGateString'];
 
-deviceController.getDevices = (req, res, next) => {
-  //pull down the devices in the DUMP (will look into mongoose set up later)
-  const results = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../dump/devices.dev.json'), 'UTF-8'));
-  console.log('in get devices');
-  if (!results) {
-    return next({
-      log: 'deviceController.getDevices: ERROR: Error getting getDevices data from getDevices.dev.json file',
-      message: { err: 'Error occurred in deviceController.getDevices. Check server logs for more details.' },
-    });
-  }
-  else { //save into locals, we will add to that in addDevices
-    console.log("post retrieval". results)
-    res.locals.devices = results;
-    return next();
-  }
-}
+// deviceController.getDevices = (req, res, next) => {
+//   //pull down the devices in the DUMP (will look into mongoose set up later)
+//   const results = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../dump/devices.dev.json'), 'UTF-8'));
+//   console.log('in get devices');
+//   if (!results) {
+//     return next({
+//       log: 'deviceController.getDevices: ERROR: Error getting getDevices data from getDevices.dev.json file',
+//       message: { err: 'Error occurred in deviceController.getDevices. Check server logs for more details.' },
+//     });
+//   }
+//   else { //save into locals, we will add to that in addDevices
+//     console.log("post retrieval".results)
+//     res.locals.devices = results;
+//     return next();
+//   }
+// }
 
 deviceController.addDevice = (req, res, next) => {
   //we have data in the res.locals files under devices it is an an object of objects, each 'key' is  a device name
@@ -46,7 +46,7 @@ deviceController.addDevice = (req, res, next) => {
   //   })
   // }
 
-  models.Device.findOne({nameString: name}, (err,device) => {
+  models.Device.findOne({ nameString: name }, (err, device) => {
     if (err) {
       return next({
         log: 'deviceController.addDevice: ERROR: Error from findOne in addDevice',
@@ -66,52 +66,39 @@ deviceController.addDevice = (req, res, next) => {
           return next();
         }
       })
-    }})
-  // }) 
-  // models.Device.create(
-  //   {
-  //   RouterOrSwitch: true,
-  //   nameString: "blargh",
-  //   secretString: "abc123",
-  //   conString: "abc123",
-  //   auxString: "abc123",
-  //   bannerInString: "abc123",
-  //   vtyString: "abc123",
-  //   vlanNumString: "abc123",
-  //   vlanIPString: "abc123",
-  //   vlanSubString: "abc123",
-  //   switchGateString: "abc123",
-  // }, (err, device) => {
-  //   if (err) {
-  //     console.log(err)
-  //   }
-  //   else {
-  //     console.log(device);
-  //   }
-  // })
-  // if (!results) {
-  //   return next({
-  //     log: 'deviceController.getDevices: ERROR: Error getting getDevices data from getDevices.dev.json file',
-  //     message: { err: 'Error occurred in deviceController.getDevices. Check server logs for more details.' },
-  //   });
-  // }
-  // else { //save into locals, we will add to that in addDevices
-  //   console.log("post retrieval". results)
-  //   res.locals.devices = results;
-  //   return next();
+    }
+  })
 },
 
 
 deviceController.findDevice = (req, res, next) => {
-  // write code here
+    // write code here
+    console.log('in find devices');
+    console.log(req.query.id)
+    let name = req.query.id;
+    models.Device.findOne({ 'nameString': name }, (err, device) => {
+      if (err) {
+        return next({
+          log: 'deviceController.addDevice: ERROR: Error from findOne in findDevice',
+          message: { err: 'Error occurred in deviceController.findDevice. Check server logs for more details.' }
+        });
+      }
+      else if (device===null) {
+        res.locals.device = device;
+        return next();
+      }
+      else {
+        console.log('device found',device);
+        res.locals.device = device;
+        return next();
+      }
+    })
+  },
 
-  next();
-},
+  deviceController.deleteDevice = (req, res, next) => {
+    // write code here
 
-deviceController.deleteDevice = (req, res, next) => {
-  // write code here
+    next();
+  },
 
-  next();
-},
-
-module.exports = deviceController
+  module.exports = deviceController

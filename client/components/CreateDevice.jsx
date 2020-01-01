@@ -1,14 +1,15 @@
 import React from 'react';
 import ConfigurationDisplay from '../components/ConfigurationDisplay.jsx';
 const CreateDevice = (props) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.createDevice();
+  const handleCreateSubmit = (e) => {
+      console.log('submitting create device')
+      e.preventDefault();
+      props.createDevice();
   }
 
   return (
     <div className="deviceCreator">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleCreateSubmit}>
         <input
           id="nameString"
           type="text"

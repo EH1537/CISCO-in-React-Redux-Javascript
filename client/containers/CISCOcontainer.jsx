@@ -20,6 +20,7 @@ const mapStateToProps = (state) => ({
   interfaceSubnet: state.interface.interfaceSubnet,
   displayInterface: state.interface.display,  
   //device querry
+  querryString: state.device.querryString,
   RouterOrSwitch: state.device.RouterOrSwitch,
   nameString: state.device.nameString,
   secretString: state.device.secretString,
@@ -36,6 +37,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  findDeviceAsyncThunk: (name) => dispatch(actions.findDeviceAsyncThunk(name)),
+  deleteDevice: (name) => dispatch(actions.deleteDevice(name)),
+
   createDeviceToggle: () => dispatch(actions.createDeviceToggle()),
   querryDeviceToggle: () => dispatch(actions.querryDeviceToggle()),
   configureInterfaceToggle: () => dispatch(actions.configureInterfaceToggle()),
@@ -46,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
   createDevice: () => dispatch(actions.createDevice()),
   generateConfig: () => dispatch(actions.generateConfig()),
   deviceQuerry: () => dispatch(actions.deviceQuerry()),
-  findDevice: (object) => dispatch(actions.findDevice(object)),
+  // findDevice: (object) => dispatch(actions.findDevice(object)),
   fieldBlanker: () => dispatch(actions.fieldBlanker()),
 });
 
@@ -100,7 +104,11 @@ class CISCOcontainer extends Component {
             <div><QuerryDevice
               deviceQuerryTog={this.props.deviceQuerryTog}
               deviceQuerry={this.props.deviceQuerry}
-              findDevice={this.props.findDevice}
+              // findDevice={this.props.findDevice}
+              querryString={this.props.querryString}
+              deleteDevice={this.props.deleteDevice}
+
+              findDeviceAsyncThunk={this.props.findDeviceAsyncThunk}
 
               //to be passed down to the subsequent configuration display
               createDevice={this.props.createDevice}

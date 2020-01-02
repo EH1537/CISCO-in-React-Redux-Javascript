@@ -27,4 +27,10 @@ router.post('/', deviceController.addDevice,
   } 
 );
 
+router.delete('/', deviceController.deleteDevice,
+  (req, res, next) => { 
+    res.sendStatus(200);
+  } 
+);
+
 module.exports = router;

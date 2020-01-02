@@ -1,7 +1,12 @@
 import * as types from '../constants/actionTypes';
 import * as CISCO_IO from '../constants/input.js';
 const initialState = {
+  deviceStore: [],
+  loading: false,
+  error: null,
+
   RouterOrSwitch: false,
+  querryString: '',
   nameString: '',
   secretString: '',
   conString: '',
@@ -17,9 +22,84 @@ const initialState = {
 
 const CISCODeviceReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case types.FIND_THUNK_DEVICE_STARTED:{
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case types.FIND_THUNK_DEVICE_SUCCESS: {
+      console.log(action.payload);
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        RouterOrSwitch: action.payload.RouterOrSwitch,
+        nameString: action.payload.nameString ,
+        secretString: action.payload.secretString ,
+        conString: action.payload.conString ,
+        auxString: action.payload.auxString ,
+        bannerInString: action.payload.bannerInString ,
+        //router only
+        vtyString: action.payload.vtyString ,
+        //switch only
+        vlanNumString: action.payload.vlanNumString ,
+        vlanIPString: action.payload.vlanIPString ,
+        vlanSubString: action.payload.vlanSubString ,
+        switchGateString: action.payload.switchGateString ,
+      };
+    }
+
+    case types.FIND_THUNK_DEVICE_FAIL:{
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
+      };
+    }
+
+
+
+
+
+
+
+
+
+
+    case types.DELETE_DEVICE: {
+      fetch(`/api/?id=${action.payload}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+      })
+      return {
+        ...state,
+        querryString: '',
+        RouterOrSwitch: false,
+        nameString: '',
+        secretString: '',
+        conString: '',
+        auxString: '',
+        bannerInString: '',
+        //router only
+        vtyString: '',
+        //switch only
+        vlanNumString: '',
+        vlanIPString: '',
+        vlanSubString: '',
+        switchGateString: '',
+        display: '',
+      }
+    }
+
     case types.FIELD_BLANKER: {
       return {
         ...state,
+        querryString: '',
         RouterOrSwitch: false,
         nameString: '',
         secretString: '',
@@ -48,6 +128,12 @@ const CISCODeviceReducer = (state = initialState, action) => {
 
     case types.DEVICE_CONFIG: {
       switch (action.payload.id) {
+        case "querryString": {
+          return {
+            ...state,
+            querryString: action.payload.string
+          }
+        }
         case "nameString": {
           return {
             ...state,

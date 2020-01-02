@@ -2,33 +2,27 @@ import React from 'react';
 import CreateDevice from '../components/CreateDevice.jsx';
 const QuerryDevice = (props) => {
   const handleSubmit = (e) => {
-    console.log('submitting querry device')
+    console.log('querry submitted');
     e.preventDefault();
-    console.log('executing devce querry')
+    props.findDeviceAsyncThunk(props.querryString);
     props.deviceQuerry();
-    fetch(`/api/?id=${props.nameString}`)
-    .then(response => response.json())
-    .then(deviceFound => {
-      console.log("device found",deviceFound)
-      props.findDevice(deviceFound);
-    });
-
   }
 
   return (
     <div id="querryID">
       <form onSubmit={handleSubmit}>
         <input
-          id="nameString"
+          id="querryString"
           type="text"
           placeholder="Device Name"
           onChange={props.deviceConfig}
-          value={props.nameString}>
+          value={props.querryString}>
         </input>
         <input type="submit" value="Querry a Device"></input>
       </form>
       {props.deviceQuerryTog === true &&
       <div>
+        <button id='deleteDevice' type='button' onClick={() => {props.deleteDevice(props.nameString), props.deviceQuerry()}}>Delete Device</button>
         <CreateDevice
           createDevice={props.createDevice}
           generateConfig={props.generateConfig}

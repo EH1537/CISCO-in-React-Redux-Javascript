@@ -3,22 +3,46 @@ body {
   text-align: center;
 }
 
-.deviceCreator {
-  display: inline-flex;
+.deviceCreator{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.deviceCreator form{
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.RorS {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.deviceCreator label{
+  font-weight: 900;
+  color: darkslategrey;
+}
 .deviceCreator input{
   font-weight: 555;
   color: blue;
   padding: 10px;
-  margin: 20px;
+  padding: 10px;
+  margin: 10px;
 }
 
 .configInterface {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.configInterface form{
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -27,10 +51,31 @@ body {
   font-weight: 555;
   color: darkgreen;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
+}
+.GenerateConfig{
+  font-weight: 555;
+  color: darkgreen;
+  padding: 10px;
+  margin: 10px;
+}
+.inputComponent{
+  padding: 10px;
 }
 
-
+#deleteDevice{
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  color:gainsboro;
+  background-color: darkred;
+  border: whitesmoke;
+  padding: 5px;
+}
+.break {
+  flex-basis: 100%;
+  height: 5px;
+}
 form{
   width: 100%
 }

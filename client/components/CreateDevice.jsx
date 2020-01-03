@@ -6,12 +6,13 @@ const CreateDevice = (props) => {
       e.preventDefault();
       props.createDevice();
   }
-
+//create device has a very large number of fields that are all updating the state when they change, each field (or input)
+//had an id and a value, when they are chagned, it invokes the deviceConfig action, feeding the value 
   return (
     <div className="deviceCreator">
       <form onSubmit={handleCreateSubmit}><br></br>
         <div className = "inputComponent">
-        <label for="nameString">Name of Device</label><br></br>
+        <label htmlFor="nameString">Name of Device</label><br></br>
           <input
           id="nameString"
           type="text"
@@ -21,7 +22,7 @@ const CreateDevice = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="secretString">Secret Password</label><br></br>
+        <label htmlFor="secretString">Secret Password</label><br></br>
         <input
           id="secretString"
           type="text"
@@ -31,7 +32,7 @@ const CreateDevice = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="conString">Console Password</label><br></br>
+        <label htmlFor="conString">Console Password</label><br></br>
         <input
           id="conString"
           type="text"
@@ -41,7 +42,7 @@ const CreateDevice = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="vtyString">VTY Password</label><br></br>
+        <label htmlFor="vtyString">VTY Password</label><br></br>
         <input
           id="vtyString"
           type="text"
@@ -51,7 +52,7 @@ const CreateDevice = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="bannerInString">Banner MOTD</label><br></br>
+        <label htmlFor="bannerInString">Banner MOTD</label><br></br>
         <input
           id="bannerInString"
           type="text"
@@ -60,15 +61,15 @@ const CreateDevice = (props) => {
           value={props.bannerInString}>
         </input>
         </div>
-        <div class="break"></div> 
+        <div className="break"></div> 
         <div>
         <button id='RouterOrSwitch' type='button' onClick={() => props.routerOrSwitchToggle()}>Router?</button>
         </div>
-        <div class="break"></div> 
+        <div className="break"></div> 
         {props.RouterOrSwitch === false &&
           <div className="RorS" >
           <div>
-          <label for="vlanNumString">VLAN Number</label><br></br>
+          <label htmlFor="vlanNumString">VLAN Number</label><br></br>
             <input
               id='vlanNumString'
               type="text"
@@ -78,7 +79,7 @@ const CreateDevice = (props) => {
             </input>
           </div>
           <div>
-          <label for="vlanIPString">VLAN IP Address</label><br></br>
+          <label htmlFor="vlanIPString">VLAN IP Address</label><br></br>
             <input
               id="vlanIPString"
               type="text"
@@ -88,7 +89,7 @@ const CreateDevice = (props) => {
             </input>
           </div>
           <div>
-          <label for="vlanSubString">VLAN Subnet Mask</label><br></br>
+          <label htmlFor="vlanSubString">VLAN Subnet Mask</label><br></br>
             <input
               id="vlanSubString"
               type="text"
@@ -98,7 +99,7 @@ const CreateDevice = (props) => {
             </input>
           </div>
           <div>
-          <label for="switchGateString">Default Gateway for Switch</label><br></br>
+          <label htmlFor="switchGateString">VLAN Gateway</label><br></br>
             <input
               id="switchGateString"
               type="text"
@@ -111,7 +112,7 @@ const CreateDevice = (props) => {
         }
         {props.RouterOrSwitch === true && <div>
           <div className = "inputComponent">
-          <label for="auxString">Aux Password for Router</label><br></br>
+          <label htmlFor="auxString">Aux Password for Router</label><br></br>
           <input
           id="auxString"
           type="text"
@@ -121,9 +122,9 @@ const CreateDevice = (props) => {
           </input>
           </div>
         </div>}
-        <div class="break"></div> 
-        <button class='GenerateConfig' type='button' onClick={() => props.generateConfig()}>Generate Config</button>
-        <div class="break"></div> 
+        <div className="break"></div> 
+        <button className='GenerateConfig' type='button' onClick={() => props.generateConfig()}>Generate Config</button>
+        <div className="break"></div> 
         <input id='addDevice' type="submit" value="Add Device"></input>
       </form>
       <ConfigurationDisplay display={(props.display)} />

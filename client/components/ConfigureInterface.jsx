@@ -11,7 +11,7 @@ const ConfigureInterface = (props) => {
     <div className="configInterface">
       <form onSubmit={handleSubmit}>
       <div className = "inputComponent">
-        <label for="IPname">Name of Interface</label><br></br>
+        <label htmlFor="IPname">Name of Interface</label><br></br>
         <input
           id = "IPname"
           type="text"
@@ -21,7 +21,7 @@ const ConfigureInterface = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="description">Interface desciption</label><br></br>
+        <label htmlFor="description">Description</label><br></br>
         <input
           id = "description"
           type="text"
@@ -31,7 +31,7 @@ const ConfigureInterface = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="address">IP Address</label><br></br>
+        <label htmlFor="address">IP Address</label><br></br>
         <input
           id = "address"
           type="text"
@@ -41,7 +41,7 @@ const ConfigureInterface = (props) => {
         </input>
         </div>
         <div className = "inputComponent">
-        <label for="address">IP Address</label><br></br>
+        <label htmlFor="subnet">Subnet Mask</label><br></br>
         <input
           id = "subnet"
           type="text"
@@ -50,8 +50,8 @@ const ConfigureInterface = (props) => {
           value={props.interfaceSubnet}>
         </input>
         </div>
-        <div class="break"></div> 
-        <input class= "GenerateConfig" type= "submit" value="Generate Config"></input>
+        <div className="break"></div> 
+        <input className= "GenerateConfig" type= "submit" value="Generate Config"></input>
       </form>
       <ConfigurationDisplay display={(props.display)}/>
     </div>

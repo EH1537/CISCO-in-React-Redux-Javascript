@@ -60,15 +60,6 @@ const CISCODeviceReducer = (state = initialState, action) => {
       };
     }
 
-
-
-
-
-
-
-
-
-
     case types.DELETE_DEVICE: {
       fetch(`/api/?id=${action.payload}`, {
         method: "DELETE",
@@ -76,6 +67,7 @@ const CISCODeviceReducer = (state = initialState, action) => {
           'Content-Type': 'application/json;charset=utf-8'
         },
       })
+      .then(alert(`device ${action.payload} had been deleted`));
       return {
         ...state,
         querryString: '',
@@ -196,6 +188,7 @@ const CISCODeviceReducer = (state = initialState, action) => {
         }
       }
     }
+
     case types.GENERATE_CONFIG: {
       let stateCopy = Object.assign({}, state);
       let prototypeInterface = {

@@ -9,7 +9,8 @@ class App extends Component {
   render() {
     return (
       <div id="app">
-        <h1>CISCO Configuration built with React, Redux (ouch) and Mongo</h1>
+        <h1>CISCO Configuration</h1>
+        <h2>....connected to Database</h2>
         <CISCOContainer />
       </div>
     )

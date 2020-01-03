@@ -14,6 +14,11 @@ const commandObj = {
   BannerCheck: true, //BANNER IS FALSE BY DEFAULT PROVIDING 
   VLanCheck : true, //VLAN CHECKER TO BE ONLY ACCESSIBLE VIA 
   RouterOrSwitch : true,
+  dhcpPoolName: '',
+  dhcpNetwork:'',
+  dhcpExAddress:'',
+  dhcpNetwork: '',
+  dhcpDefaultRouter: '',
 }
 //object for refernce
 const interfaceObj = {
@@ -76,6 +81,13 @@ export function CLIStringBuilder(commandObj) {
       "line aux 0" + "\r\n"
       + "password " + commandObj.auxString + "\r\n"
       + "login" + "\r\n";
+  }
+
+  if(commandObj.dhcpPoolName !== ''){
+    commandString +=//Aux is set if Router is selected
+    "line aux 0" + "\r\n"
+    + "password " + commandObj.auxString + "\r\n"
+    + "login" + "\r\n";
   }
 
   commandString +=//end sequence for now

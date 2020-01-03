@@ -18,10 +18,11 @@ const QuerryDevice = (props) => {
           onChange={props.deviceConfig}
           value={props.querryString}>
         </input>
-        <input type="submit" value="Querry a Device"></input>
+        <input type="submit" value="Query a Device"></input>
       </form>
       {props.deviceQuerryTog === true &&
       <div>
+        <button id = 'updateDevice' type='button'onClick={() => {props.updateDevice(props.nameString), props.deviceQuerry()}}>Update Device</button>
         <button id='deleteDevice' type='button' onClick={() => {props.deleteDevice(props.nameString), props.deviceQuerry()}}>Delete Device</button>
         <CreateDevice
           createDevice={props.createDevice}

@@ -3,17 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const deviceController = {};
 
-const checker = ['RouterOrSwitch',
-  'nameString',
-  'secretString',
-  'conString',
-  'auxString',
-  'bannerInString',
-  'vtyString',
-  'vlanNumString',
-  'vlanIPString',
-  'vlanSubString',
-  'switchGateString'];
 
 
 deviceController.addDevice = (req, res, next) => {

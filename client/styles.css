@@ -1,8 +1,58 @@
 body {
   align-content: center;
   text-align: center;
+  background-color: black;
+  background-image: radial-gradient(
+    rgba(0, 150, 0, 0.75), black 120%
+  );
+  height: 100vh;
+  color: lightgrey;
+  font: 1.3rem Inconsolata, monospace;
+  text-shadow: 0 0 5px #C8C8C8;
+}
+::selection {
+  background: #0080FF;
+  text-shadow: none;
 }
 
+h1{
+  padding-top: 20px;
+}
+
+h2 {
+  animation: blinker .5s cubic-bezier(.1, .6, .8, 1) infinite alternate;  
+}
+@keyframes blinker { to { opacity: 0; } }
+
+button {
+  background-color: transparent;
+  font-weight: 750;
+  font-size: 15px;;
+  color: rgba(255, 248, 220, 0.63);
+  text-shadow: 0 0 8px #C8C8C8;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border-color: lightgrey;
+  border-style: dashed;
+}
+
+button:active {
+  border-style: solid;
+}
+
+
+input[type=submit] {
+  background-color: transparent;
+  font-weight: 555;
+  color: lightgrey;
+  text-shadow: 0 0 5px #C8C8C8;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border-color: lightgrey;
+  border-style: dashed;
+}
 .deviceCreator{
   display: flex;
   flex-direction: row;
@@ -16,6 +66,10 @@ body {
   justify-content: center;
 }
 
+input{
+  background-color: lightgrey;
+}
+
 .RorS {
   display: flex;
   flex-direction: row;
@@ -25,14 +79,20 @@ body {
 
 .deviceCreator label{
   font-weight: 900;
-  color: darkslategrey;
+  color: lightgrey;
+  text-shadow: 0 0 5px #C8C8C8;
 }
-.deviceCreator input{
+input[type=text]{
   font-weight: 555;
-  color: blue;
+  color: darkslateblue;
   padding: 10px;
   padding: 10px;
   margin: 10px;
+}
+
+#addDevice{
+  color: white;
+  border-color: white;
 }
 
 .configInterface {
@@ -47,18 +107,13 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-.configInterface input{
+.configInterface input[type=text]{
   font-weight: 555;
-  color: darkgreen;
+  color: darkolivegreen;
   padding: 10px;
   margin: 10px;
 }
-.GenerateConfig{
-  font-weight: 555;
-  color: darkgreen;
-  padding: 10px;
-  margin: 10px;
-}
+
 .inputComponent{
   padding: 10px;
 }
@@ -72,6 +127,11 @@ body {
   border: whitesmoke;
   padding: 5px;
 }
+
+p{
+  font-size: 15px;
+}
+
 .break {
   flex-basis: 100%;
   height: 5px;

@@ -27,6 +27,23 @@ router.post('/', deviceController.addDevice,
   } 
 );
 
+router.post('/',
+  (req, res, next) => { 
+    models.Device.create(req.body[name], (err, device) => {
+      if (err) {
+        return next({
+          log: 'deviceController.addDevice: ERROR: Error from adding document in addDevice',
+          message: { err: 'Error occurred in deviceController.addDevice. Check server logs for more details.' }
+        });
+      }
+      else {
+        console.log("device created", device);
+        return next();
+      }
+    })
+  } 
+);
+
 router.delete('/', deviceController.deleteDevice,
   (req, res, next) => { 
     res.sendStatus(200);
